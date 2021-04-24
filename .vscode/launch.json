@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "type": "java",
             "name": "Launch Current File",
@@ -15,9 +14,15 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "vmArgs": "--module-path ${workspaceFolder}/lib/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "App",
-            "projectName": "piescheduler_a2b42130"
+            "mainClass": "io.github.dowhep/io.github.dowhep.App",
+            "projectName": "piescheduler"
+        },
+        {
+            "type": "java",
+            "name": "Launch Data",
+            "request": "launch",
+            "mainClass": "io.github.dowhep/io.github.dowhep.HelperClasses.Data",
+            "projectName": "piescheduler"
         }
     ]
 }
