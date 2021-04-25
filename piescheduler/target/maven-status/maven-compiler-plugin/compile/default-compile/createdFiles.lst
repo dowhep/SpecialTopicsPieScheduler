@@ -1,8 +1,0 @@
-io\github\dowhep\Example\ExampleSceneController.class
-module-info.class
-io\github\dowhep\App.class
-io\github\dowhep\Controllers\PrimaryController.class
-io\github\dowhep\HelperClasses\Data.class
-io\github\dowhep\AbstractClasses\Pie.class
-io\github\dowhep\Controllers\SecondaryController.class
-io\github\dowhep\AbstractClasses\PieSlice.class
