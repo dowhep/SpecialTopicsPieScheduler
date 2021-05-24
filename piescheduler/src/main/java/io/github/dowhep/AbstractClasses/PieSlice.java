@@ -1,7 +1,5 @@
 package io.github.dowhep.AbstractClasses;
 
-import java.util.*;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

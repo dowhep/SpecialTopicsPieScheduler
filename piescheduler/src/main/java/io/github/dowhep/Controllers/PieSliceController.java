@@ -32,7 +32,8 @@ public class PieSliceController {
     private Button enterButton;
 
     @FXML
-    void cancel(ActionEvent event) {
+    void cancel(ActionEvent event) throws IOException {
+        App.setRoot("piePage");
     }
 
     @FXML
