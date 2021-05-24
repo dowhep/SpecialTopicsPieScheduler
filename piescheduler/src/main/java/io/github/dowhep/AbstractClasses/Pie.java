@@ -1,40 +1,52 @@
 package io.github.dowhep.AbstractClasses;
+
 import java.util.*;
 import io.github.dowhep.HelperClasses.*;
-public class Pie
-{
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+public class Pie {
 	// Varriables:
-    private String pieName;
-    ArrayList<PieSlice> sliceStorage;
-    private String color;
+	private String pieName;
+	ObservableList<PieSlice> sliceStorage;
+	private String color;
+	private boolean timeFormat;
 
 	// Constructors:
-    public Pie()
-    {
-        pieName = "New Pie " + Data.getNumberOfPies();
-        sliceStorage = new ArrayList<>();
-        color = "#FFFFFF";
-    }
+	public Pie() {
+		pieName = "New Pie";
+		sliceStorage = FXCollections.observableList(new ArrayList<PieSlice>());
+		color = "#FFFFFF";
+	}
 
-	public Pie(String userPieName, String userColor)
-	{
+	public Pie(String userPieName, String userColor) {
 		pieName = userPieName;
-        sliceStorage = new ArrayList<>();
-        color = userColor;
+		sliceStorage = FXCollections.observableList(new ArrayList<PieSlice>());
+		color = userColor;
 	}
 
 	// "Get" Methods: 
-	public String getPieName()
-	{
+	public String getPieName() {
 		return pieName;
 	}
 
-	public String getColor()
-	{
+	public String getColor() {
 		return color;
 	}
-    
-		
+
+	public void rename(String name) {
+		pieName = name;
+	}
+
+	// true is 24hr, false is 12hr
+	public void timeStyle(boolean style) {
+		timeFormat = style;
+	}
+
+	public ObservableList<PieSlice> getPieSlices() {
+		return sliceStorage;
+	}
+
 	/* Methods
 	 * Constructors:
 	 * 		- From Scratch (With no information, the user creates everything)

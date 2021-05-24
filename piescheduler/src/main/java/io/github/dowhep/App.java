@@ -17,11 +17,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("piePage"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * convenient way to switch pages
+     * @param fxml page destination
+     * @throws IOException
+     */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

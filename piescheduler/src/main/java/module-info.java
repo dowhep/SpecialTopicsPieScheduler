@@ -4,5 +4,7 @@ module io.github.dowhep {
 
     opens io.github.dowhep to javafx.fxml;
     opens io.github.dowhep.Controllers to javafx.fxml;
+    opens io.github.dowhep.AbstractClasses to javafx.base;
+
     exports io.github.dowhep;
 }
