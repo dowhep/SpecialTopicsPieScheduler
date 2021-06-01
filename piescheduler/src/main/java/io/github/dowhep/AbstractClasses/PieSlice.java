@@ -1,29 +1,39 @@
 package io.github.dowhep.AbstractClasses;
 
+import io.github.dowhep.HelperClasses.TimeAlgs;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.paint.Color;
 
 public class PieSlice {
-    private final StringProperty task;
-    private int time;
-    private boolean complete;
     private final StringProperty sliceName;
-    private String sliceColor;
+    private final StringProperty task;
+    private final IntegerProperty startTime; // stores minutes pass 00:00 am, ex: 10:00 am => 600
+    private final IntegerProperty duration;
+    private final BooleanProperty complete;
+    private final ObjectProperty<Color> sliceColor;
 
     public PieSlice() {
-        task = new SimpleStringProperty("Default");
-        time = 0;
-        complete = false;
-        sliceName = new SimpleStringProperty("default");
-        sliceColor = "#FFFFFF";
+        this("Default", "Default", 0, 0, Color.WHITE);
     }
 
     public PieSlice(String SliceName, String Task) {
-        task = new SimpleStringProperty(Task);
-        time = 0;
-        complete = false;
+        this(SliceName, Task, 0, 0, Color.WHITE);
+    }
+
+    public PieSlice(String SliceName, String Task, int StartTime, int Duration, Color SliceColor) {
         sliceName = new SimpleStringProperty(SliceName);
-        sliceColor = "#FFFFFF";
+        task = new SimpleStringProperty(Task);
+        startTime = new SimpleIntegerProperty(StartTime);
+        duration = new SimpleIntegerProperty(Duration);
+        complete = new SimpleBooleanProperty(false);
+        sliceColor = new SimpleObjectProperty<Color>(SliceColor);
     }
 
     public String getTask() {
@@ -34,23 +44,27 @@ public class PieSlice {
         task.set(input);
     }
 
-    public int getTime() {
-        return time;
+    public int getDuration() {
+        return duration.get();
+    }
+
+    public String getStartTimeString() {
+        return TimeAlgs.translateTimeIntStr(startTime.get());
     }
 
     // if you're calling this you'll probably want
     // to run a method to change the pie visual
     // at the same time
-    public void setTime(int input) {
-        time = input;
+    public void setDuration(int input) {
+        duration.set(input);
     }
 
     public boolean isComplete() {
-        return complete;
+        return complete.get();
     }
 
     public void setComplete(boolean input) {
-        complete = input;
+        complete.set(input);
     }
 
     public String getSliceName() {
@@ -61,21 +75,37 @@ public class PieSlice {
         sliceName.set(input);
     }
 
-    public String color() {
-        return sliceColor;
+    public Color color() {
+        return sliceColor.get();
     }
 
     // takes in hex values
-    public void setColor(String input) {
-        sliceColor = input;
+    public void setColor(Color input) {
+        sliceColor.set(input);
+    }
+
+    public final StringProperty sliceNameProperty() {
+        return sliceName;
     }
 
     public final StringProperty taskProperty() {
         return task;
     }
 
-    public final StringProperty sliceNameProperty() {
-        return sliceName;
+    public final IntegerProperty durationProperty() {
+        return duration;
+    }
+
+    public final BooleanProperty completeProperty() {
+        return complete;
+    }
+
+    public final ObjectProperty<Color> sliceColorProperty() {
+        return sliceColor;
+    }
+
+    public final IntegerProperty startTimeProperty() {
+        return startTime;
     }
 }
 /*

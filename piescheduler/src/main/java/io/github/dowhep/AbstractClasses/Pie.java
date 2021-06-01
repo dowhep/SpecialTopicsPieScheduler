@@ -4,48 +4,54 @@ import java.util.*;
 import io.github.dowhep.HelperClasses.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Pie {
 	// Varriables:
-	private String pieName;
-	ObservableList<PieSlice> sliceStorage;
-	private String color;
-	private boolean timeFormat;
+	private final StringProperty pieName;
+	private final StringProperty color;
+	private final BooleanProperty timeFormat;
+	private final ObservableList<PieSlice> sliceStorage;
 
 	// Constructors:
 	public Pie() {
-		pieName = "New Pie";
-		sliceStorage = FXCollections.observableList(new ArrayList<PieSlice>());
-		color = "#FFFFFF";
+		this("New Pie", "#FFFFFF", true);
 	}
 
-	public Pie(String userPieName, String userColor) {
-		pieName = userPieName;
+	public Pie(String userPieName, String userColor, Boolean userTimeFormat) {
+		pieName = new SimpleStringProperty(userPieName);
 		sliceStorage = FXCollections.observableList(new ArrayList<PieSlice>());
-		color = userColor;
+		color = new SimpleStringProperty(userColor);
+		timeFormat = new SimpleBooleanProperty(userTimeFormat);
 	}
 
 	// "Get" Methods: 
-	public String getPieName() {
+	public void rename(String name) {
+		pieName.set(name);
+	}
+
+	public final StringProperty pieNameProperty() {
 		return pieName;
 	}
 
-	public String getColor() {
+	public final StringProperty colorProperty() {
 		return color;
 	}
 
-	public void rename(String name) {
-		pieName = name;
+	public final BooleanProperty timeFormatProperty() {
+		return timeFormat;
+	}
+
+	public final ObservableList<PieSlice> getSliceStorage() {
+		return sliceStorage;
 	}
 
 	// true is 24hr, false is 12hr
-	public void timeStyle(boolean style) {
-		timeFormat = style;
-	}
-
-	public ObservableList<PieSlice> getPieSlices() {
-		return sliceStorage;
-	}
 
 	/* Methods
 	 * Constructors:
