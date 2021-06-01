@@ -74,6 +74,7 @@ public class PieSliceController {
         fromTimeText.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) {
                 fromIntProperty.set(TimeAlgs.translateTimeStrInt(TimeAlgs.validateTimeForm(fromTimeText.getText())));
+                fromTimeText.setText(TimeAlgs.translateTimeIntStr(fromIntProperty.get()));
             } else {
                 Platform.runLater(() -> {
                     if (fromTimeText.isFocused() && !fromTimeText.getText().isEmpty())
@@ -85,6 +86,7 @@ public class PieSliceController {
         toTimeText.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) {
                 toIntProperty.set(TimeAlgs.translateTimeStrInt(TimeAlgs.validateTimeForm(toTimeText.getText())));
+                toTimeText.setText(TimeAlgs.translateTimeIntStr(toIntProperty.get()));
             } else {
                 Platform.runLater(() -> {
                     if (toTimeText.isFocused() && !toTimeText.getText().isEmpty())

@@ -19,8 +19,8 @@ public class TimeAlgs {
     public static int translateTimeStrInt(String str) {
         assert (str.matches("\\d*:\\d*"));
         String[] tuplet = str.split(":");
-        int hour = advParseInt(tuplet[0]);
-        int minute = advParseInt(tuplet[1]);
+        int hour = tuplet.length < 1 ? 0 : advParseInt(tuplet[0]);
+        int minute = tuplet.length < 2 ? 0 : advParseInt(tuplet[1]);
         hour = hour < 0 ? 0 : hour > 23 ? 23 : hour;
         minute = minute < 0 ? 0 : minute > 59 ? 59 : minute;
         return hour * 60 + minute;
@@ -34,8 +34,8 @@ public class TimeAlgs {
     public static int translateTimeStrIntUncapped(String str) {
         assert (str.matches("\\d*:\\d*"));
         String[] tuplet = str.split(":");
-        int hour = advParseInt(tuplet[0]);
-        int minute = advParseInt(tuplet[1]);
+        int hour = tuplet.length < 1 ? 0 : advParseInt(tuplet[0]);
+        int minute = tuplet.length < 2 ? 0 : advParseInt(tuplet[1]);
         return hour * 60 + minute;
     }
 

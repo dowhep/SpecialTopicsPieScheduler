@@ -15,15 +15,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import io.github.dowhep.App;
 import io.github.dowhep.AbstractClasses.*;
 import io.github.dowhep.HelperClasses.Data;
 
 public class PiePageController {
+    final private HashMap<Node, PieSlice> map = new HashMap<Node, PieSlice>();
 
     @FXML
     private VBox sceneContainer;
@@ -56,51 +59,57 @@ public class PiePageController {
 
     @FXML
     public void initialize() {
+
         sliceTable.setPlaceholder(new Label("Just Emptiness..."));
 
         sliceNameColumn.setCellValueFactory(new PropertyValueFactory<>("sliceName"));
         taskNameColumn.setCellValueFactory(new PropertyValueFactory<>("task"));
 
-        ObservableList<PieSlice> slices = Data.getInstance().getPie().getSliceStorage();
-        sliceTable.setItems(slices);
-
         // pie chart
+        ObservableList<PieSlice> slices = Data.getInstance().getPie().getSliceStorage();
         ArrayList<PieChart.Data> dataList = new ArrayList<PieChart.Data>();
 
         for (int i = 0; slices.size() > i; i++) {
             PieChart.Data slice = new PieChart.Data(slices.get(i).getSliceName(), slices.get(i).getDuration());
             dataList.add(slice);
         }
-
+        sliceTable.setItems(slices);
         ObservableList<PieChart.Data> chartData = FXCollections.observableList(dataList);
 
         final PieChart thingsChart = new PieChart(chartData);
-        thingsChart.setTitle("Pie Program");
+
+        thingsChart.setTitle("Your Day");
+
+        final Label caption = new Label();
+        caption.setTextFill(Color.DARKORANGE);
+        caption.setStyle("-fx-font: 16 arial;");
 
         sceneContainer.getChildren().add(thingsChart);
+        sceneContainer.getChildren().add(caption);
 
+        // credit to jewelsea on stackoverflow for the coloring
         for (int i = 0; slices.size() > i; i++) {
             Node slice = dataList.get(i).getNode();
-            slice.setStyle("-fx-pie-color: " + toHexString(slices.get(i).color()) + ";");
-            slice.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
+            map.put(slice, slices.get(i));
 
+            slice.setStyle("-fx-pie-color: " + toHexString(slices.get(i).color()) + ";");
+
+            // we can do something here
+            slice.addEventHandler(MouseEvent.MOUSE_ENTERED, (e) -> {
+                PieSlice theSlice = map.get(e.getSource());
+                caption.setText("Start: " + theSlice.getStartTimeString() + ", Duration: " + theSlice.getDuration()
+                        + " minutes");
             }); // when slice is hovered
             slice.addEventHandler(MouseEvent.MOUSE_MOVED, (e) -> {
-
+                caption.setTranslateX(e.getX() + 335);
+                caption.setTranslateY(e.getY() - 65);
             }); // when mouse is moving
-            slice.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-
-            }); // when slice is clicked
+            slice.addEventHandler(MouseEvent.MOUSE_EXITED, (e) -> {
+                caption.setTranslateX(-1000);
+                caption.setTranslateY(-1000);
+            }); // when slice is unhovered
         }
-        /*
-            ObservableList<PieChart.Data> chartData = FXCollections.observableArrayList(new PieChart.Data("Grapefruit", 13),
-                new PieChart.Data("Oranges", 25), new PieChart.Data("Plums", 10), new PieChart.Data("Pears", 22),
-                new PieChart.Data("Apples", 30));
-        final PieChart thingsChart = new PieChart(chartData);
-        thingsChart.setTitle("Your Day");
-        
-        sceneContainer.getChildren().add(thingsChart);
-        */
+
     }
 
     // Helper method, safe floating points

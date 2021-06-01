@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="sceneContainer" fx:controller="io.github.dowhep.Controllers.PiePageController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="sceneContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.dowhep.Controllers.PiePageController">
   <children>
     <MenuBar prefHeight="34.0" prefWidth="694.0" VBox.vgrow="NEVER">
       <menus>
@@ -54,7 +54,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="474.0" prefWidth="860.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="474.0" prefWidth="860.0" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -63,7 +63,7 @@
         </Label>
             <Button fx:id="createANewSliceButton" layoutX="471.0" layoutY="18.0" mnemonicParsing="false" onAction="#createNewSlice" text="Create a New Slice" />
             <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pie" wrappingWidth="93.720703125" />
-            <TableView fx:id="sliceTable" layoutX="14.0" layoutY="57.0" prefHeight="301.0" prefWidth="549.0">
+            <TableView fx:id="sliceTable" layoutX="14.0" layoutY="57.0" prefHeight="144.0" prefWidth="550.0">
               <columns>
                 <TableColumn fx:id="sliceNameColumn" prefWidth="75.0" text="Slice Name" />
                 <TableColumn fx:id="fromTimeColumn" prefWidth="38.0" text="From" />
