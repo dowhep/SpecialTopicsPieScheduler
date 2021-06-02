@@ -84,6 +84,14 @@ public class PieSlice {
         sliceColor.set(input);
     }
 
+    public String getBeginTime() {
+        return TimeAlgs.translateTimeIntStr(startTime.get());
+    }
+
+    public String getEndTime() {
+        return TimeAlgs.translateTimeIntStr(startTime.get() + duration.get());
+    }
+
     public final StringProperty sliceNameProperty() {
         return sliceName;
     }

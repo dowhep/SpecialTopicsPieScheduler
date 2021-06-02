@@ -64,6 +64,8 @@ public class PiePageController {
 
         sliceNameColumn.setCellValueFactory(new PropertyValueFactory<>("sliceName"));
         taskNameColumn.setCellValueFactory(new PropertyValueFactory<>("task"));
+        fromTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTime"));
+        toTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
 
         // pie chart
         ObservableList<PieSlice> slices = Data.getInstance().getPie().getSliceStorage();
